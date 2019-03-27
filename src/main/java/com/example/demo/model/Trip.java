@@ -23,7 +23,6 @@ public class Trip {
         this.destination = desctription;
     }
 
-
     public Trip() {
     }
 

@@ -45,24 +45,30 @@ public class TravelOffice {
         return "Customers: " + setOfCustomers.toString() + "\n" + "Trips: " + mapOfTrips.values().toString();
     }
 
-    public void showTrips() {
+    public String showTrips() {
+        StringBuilder trips=new StringBuilder();
         if (mapOfTrips.isEmpty()) {
-            System.out.println("List of trips is empty");
+            return"List of trips is empty";
         } else
             System.out.println("All trips: ");
-        mapOfTrips.entrySet().forEach(x -> System.out.println(x.getKey() + " " + x.getValue()));
+        mapOfTrips.entrySet().forEach(x -> trips.append(x.getKey() + " " + x.getValue()+"\n"));
+        return "All trips: "+trips;
     }
 
-    public void showCustomers() {
+    public String showCustomers() {
+        StringBuilder customers=new StringBuilder();
         if (setOfCustomers.isEmpty()) {
-            System.out.println("list of customers is empty");
+            return "list of customers is empt";
         } else
-            System.out.print("Customers");
-        setOfCustomers.forEach(x -> System.out.print(x.toString()));
-    }
+             setOfCustomers.forEach(x -> customers.append(x.toString()+"\n"));
+             return "customers"+customers;
 
-    public void addTrip(String id, Trip trip) {
+
+        }
+
+    public Trip addTrip(String id, Trip trip) {
         mapOfTrips.put(id, trip);
+        return trip;
     }
 
     public boolean removeTrip(String id) throws NoSuchTripException {
