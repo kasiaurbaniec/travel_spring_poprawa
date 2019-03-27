@@ -52,6 +52,7 @@ public class TravelController {
         Address address = new Address(street, streetNumber, city, code);
         Customer customer = new Customer(name);
         customer.setAddress(address);
+        customer.assignTrip(null);
         return toServiceImpl.addCustomer(customer);
     }
 

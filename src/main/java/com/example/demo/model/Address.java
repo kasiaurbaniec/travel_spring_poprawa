@@ -12,6 +12,21 @@ public class Address {
         this.number = number;
     }
 
+    public String getStreet() {
+        return street;
+    }
+
+    public String getCity() {
+        return City;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public String getNumber() {
+        return number;
+    }
 
     public String toString() {
         return  street + ' ' +number+" "+code+" "
