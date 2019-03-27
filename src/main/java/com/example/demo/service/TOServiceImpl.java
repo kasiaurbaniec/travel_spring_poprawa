@@ -6,10 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 import java.util.Set;
 @Service
-public class TOServiceImpl {
-//    public TOService(TravelOffice to) {
-//        this.to = to;
-//    }
+public class TOServiceImpl implements TOService{
 
     public String showTrips() {
         return to.showTrips();
@@ -36,8 +33,9 @@ public class TOServiceImpl {
     public boolean removeTrip(String id) throws NoSuchTripException {
         return to.removeTrip(id);
     }
-    public void addCustomer(Customer customer) {
+    public Customer addCustomer(Customer customer) {
         to.addCustomer(customer);
+        return customer;
     }
     public boolean customerInSetChecker(String name){
         return to.customerInSetChecker(name);

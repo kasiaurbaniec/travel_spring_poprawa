@@ -27,6 +27,11 @@ private Trip trip=null;
         }else{
                     return "\nname: "+name+" \ntrip: "+trip.toString()+" \naddress: "+address.toString()+"\n";}}
 
+    public Address getAddress() {
+        return address;
+    }
 
-
+    public Trip getTrip() {
+        return trip;
+    }
 }
