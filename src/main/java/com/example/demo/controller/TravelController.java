@@ -29,13 +29,13 @@ public class TravelController {
         return toServiceImpl.showCustomers();
     }
 
-    @GetMapping("/showtrips")
+    @GetMapping("/showTrips")
     public String showTrips() {
         return toServiceImpl.showTrips();
     }
 
     @GetMapping("/addTrip")
-    Trip getTripFromGET(@RequestParam String id, @RequestParam String startDate, @RequestParam String endDate, @RequestParam String desti,
+    Trip addTripFromGET(@RequestParam String id, @RequestParam String startDate, @RequestParam String endDate, @RequestParam String desti,
                         @RequestParam int price) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         Trip trip = new Trip(LocalDate.parse(startDate, formatter), LocalDate.parse(endDate, formatter), desti);
@@ -44,7 +44,7 @@ public class TravelController {
     }
 
     @PostMapping("/addTrip")
-    Trip getTripFromPOST(@RequestBody Trip trip) {
+    Trip addTripFromPOST(@RequestBody Trip trip) {
         trip.setStart(trip.getStart());
         trip.setEnd(trip.getEnd());
         trip.setDestination(trip.getDestination().toUpperCase());
@@ -53,7 +53,7 @@ public class TravelController {
     }
 
     @GetMapping("/addCustomer")
-    Customer getCustomerFromGET(@RequestParam String name, @RequestParam String city, @RequestParam String code, @RequestParam String street,
+    Customer addCustomerFromGET(@RequestParam String name, @RequestParam String city, @RequestParam String code, @RequestParam String street,
                                 @RequestParam String streetNumber) {
         Address address = new Address(street, streetNumber, city, code);
         Customer customer = new Customer(name);
@@ -63,7 +63,7 @@ public class TravelController {
     }
 
     @PostMapping("/addCustomer")
-    Customer getCustomerFromPOST(Customer customer) {
+    Customer addCustomerFromPOST(Customer customer) {
         customer.setName(customer.getName());
         customer.setAddress(customer.getAddress());
         customer.assignTrip(customer.getTrip());
