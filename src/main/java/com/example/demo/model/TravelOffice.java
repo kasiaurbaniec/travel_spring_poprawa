@@ -19,23 +19,7 @@ public class TravelOffice {
 
     public void addCustomer(Customer customer) {
         setOfCustomers.add(customer);
-//        if (customerCount == 0) {
-//            listOfCustomer[0] = customer;
-//            customerCount++;
-//        } else if
-//        (customerCount == 1) {
-//            listOfCustomer[1] = customer;
-//            customerCount++;
-//        } else {
-//            Customer[] copiedList = new Customer[getCustomerCount() + 2];
-//            System.arraycopy(listOfCustomer, 0, copiedList, 0, listOfCustomer.length);
-//            copiedList[listOfCustomer.length] = customer;
-//            listOfCustomer = copiedList;
-//            customerCount++;
-//        }
     }
-
-
 
     public int getCustomerCount() {
         return setOfCustomers.size();
@@ -46,25 +30,25 @@ public class TravelOffice {
     }
 
     public String showTrips() {
-        StringBuilder trips=new StringBuilder();
+        StringBuilder trips = new StringBuilder();
         if (mapOfTrips.isEmpty()) {
-            return"List of trips is empty";
+            return "List of trips is empty";
         } else
             System.out.println("All trips: ");
-        mapOfTrips.entrySet().forEach(x -> trips.append(x.getKey() + " " + x.getValue()+"\n"));
-        return "All trips: "+trips;
+        mapOfTrips.entrySet().forEach(x -> trips.append(x.getKey() + " " + x.getValue() + "\n"));
+        return "All trips: " + trips;
     }
 
     public String showCustomers() {
-        StringBuilder customers=new StringBuilder();
+        StringBuilder customers = new StringBuilder();
         if (setOfCustomers.isEmpty()) {
-            return "list of customers is empt";
+            return "list of customers is empty";
         } else
-             setOfCustomers.forEach(x -> customers.append(x.toString()+"\n"));
-             return "customers"+customers;
+            setOfCustomers.forEach(x -> customers.append(x.toString() + "\n"));
+        return "customers" + customers;
 
 
-        }
+    }
 
     public Trip addTrip(String id, Trip trip) {
         mapOfTrips.put(id, trip);
@@ -95,11 +79,14 @@ public class TravelOffice {
         }
         return false;
     }
-    public boolean customerInSetChecker(String name){
-        for (Customer cust:getSetOfCustomers()
-        ) {if(cust.getName().equalsIgnoreCase(name))
-            return true;
-        }return false;
+
+    public boolean customerInSetChecker(String name) {
+        for (Customer cust : getSetOfCustomers()
+        ) {
+            if (cust.getName().equalsIgnoreCase(name))
+                return true;
+        }
+        return false;
     }
 }
 

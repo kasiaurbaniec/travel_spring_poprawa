@@ -2,14 +2,17 @@ package com.example.demo.model;
 
 public class Address {
     private String street;
-    private String City;
+    private String city;
     private String code;
-
+    private String number;
     public Address(String street, String number, String city, String code ) {
         this.street = street;
-        City = city;
+        this.city = city;
         this.code = code;
         this.number = number;
+    }
+
+    public Address() {
     }
 
     public String getStreet() {
@@ -17,7 +20,7 @@ public class Address {
     }
 
     public String getCity() {
-        return City;
+        return city;
     }
 
     public String getCode() {
@@ -29,11 +32,11 @@ public class Address {
     }
 
     public String toString() {
-        return  street + ' ' +number+" "+code+" "
-               + City;
+        return  street + " " +number+" "+code+" "
+               + city;
     }
 
 
 
-    private String number;
+
 }

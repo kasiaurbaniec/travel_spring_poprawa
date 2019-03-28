@@ -8,13 +8,16 @@ private Trip trip=null;
     public Customer(String name) {
         this.name = name;
     }
-
     public void setAddress(Address address) {
         this.address = address;
     }
 
     public void assignTrip(Trip trip) {
         this.trip = trip;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getName() {

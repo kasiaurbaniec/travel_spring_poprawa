@@ -2,10 +2,16 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Address;
 import com.example.demo.model.Customer;
+import com.example.demo.model.NoSuchCustomerException;
 import com.example.demo.model.Trip;
 import com.example.demo.service.TOServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.time.LocalDate;
@@ -46,7 +52,7 @@ public class TravelController {
         return toServiceImpl.addTrip(trip.getDestination().toLowerCase().substring(0, 3), trip);
     }
 
-    @GetMapping("/addCustmer")
+    @GetMapping("/addCustomer")
     Customer getCustomerFromGET(@RequestParam String name, @RequestParam String city, @RequestParam String code, @RequestParam String street,
                                 @RequestParam String streetNumber) {
         Address address = new Address(street, streetNumber, city, code);
@@ -56,7 +62,20 @@ public class TravelController {
         return toServiceImpl.addCustomer(customer);
     }
 
+    @PostMapping("/addCustomer")
+    Customer getCustomerFromPOST(Customer customer) {
+            customer.setName(customer.getName());
+            customer.setAddress(customer.getAddress());
+            customer.assignTrip(customer.getTrip());
+            return toServiceImpl.addCustomer(customer);
+    }
 
-//http://localhost:8080/addTrip?desti=Hawaje&endDate=2017-11-21&id=haw&startDate=2017-12-01
-    //http://localhost:8080/addTrip?desti=%27Bali%27&endDate=2018-09-21&id=%27bal%27&startDate=2018-08-01
+    @GetMapping("/findCustomerByName")
+   Customer findCustomer(String name) throws NoSuchCustomerException {
+        return toServiceImpl.findCustomerByName(name);
+    }
+//localhost:8080/addCustomer?name='Kasia'&city='Katowice'&code='30-454'&street='Gorzka'&streetNumber='32'
+
+    //http://localhost:8080/swagger-ui.html
+
 }
