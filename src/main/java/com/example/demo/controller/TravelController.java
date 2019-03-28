@@ -64,15 +64,31 @@ public class TravelController {
 
     @PostMapping("/addCustomer")
     Customer getCustomerFromPOST(Customer customer) {
-            customer.setName(customer.getName());
-            customer.setAddress(customer.getAddress());
-            customer.assignTrip(customer.getTrip());
-            return toServiceImpl.addCustomer(customer);
+        customer.setName(customer.getName());
+        customer.setAddress(customer.getAddress());
+        customer.assignTrip(customer.getTrip());
+        return toServiceImpl.addCustomer(customer);
     }
 
     @GetMapping("/findCustomerByName")
-   Customer findCustomer(String name) throws NoSuchCustomerException {
+    Customer findCustomer(@RequestParam String name) {
         return toServiceImpl.findCustomerByName(name);
+    }
+
+    @GetMapping("/removeCustomer")
+    boolean removeCustomer(@RequestParam String name) {
+        Customer customer = toServiceImpl.findCustomerByName(name);
+        return toServiceImpl.removeCustomer(customer);
+    }
+
+    @GetMapping("/removeTrip")
+    boolean removeTrip(@RequestParam String id) {
+        return toServiceImpl.removeTrip(id);
+    }
+
+    @PostMapping("/assignTrip")
+    boolean assignTrip(@RequestParam String id, @RequestParam String name) {
+        return toServiceImpl.assignTrip(name, id);
     }
 //localhost:8080/addCustomer?name='Kasia'&city='Katowice'&code='30-454'&street='Gorzka'&streetNumber='32'
 

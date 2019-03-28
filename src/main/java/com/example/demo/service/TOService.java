@@ -18,7 +18,9 @@ public interface TOService {
     public Customer findCustomerByName(String name) throws NoSuchCustomerException ;
 
 
-    public boolean removeTrip(String id) throws NoSuchTripException ;
+    public boolean removeCustomer(Customer customer) throws  NoSuchCustomerException;
+    public boolean removeTrip(String id) throws  NoSuchTripException;
     public Customer addCustomer(Customer customer) ;
     public boolean customerInSetChecker(String name);
+    public boolean assignTrip(String name,String tripId);
 }

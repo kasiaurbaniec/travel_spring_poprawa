@@ -72,12 +72,12 @@ public class TravelOffice {
         throw new NoSuchCustomerException("no such customer");
     }
 
-    public boolean removeCustomer(Customer customer) {
+    public boolean removeCustomer(Customer customer) throws NoSuchCustomerException{
         if (setOfCustomers.contains(customer)) {
             setOfCustomers.remove(customer);
             return true;
         }
-        return false;
+        throw new NoSuchCustomerException("no such customer");
     }
 
     public boolean customerInSetChecker(String name) {
