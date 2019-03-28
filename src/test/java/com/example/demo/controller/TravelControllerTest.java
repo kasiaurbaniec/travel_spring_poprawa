@@ -93,14 +93,14 @@ public class TravelControllerTest {
     public void addCustomerFromPOST() throws Exception {
         JSONObject customer = new JSONObject();
         JSONObject address = new JSONObject();
+        customer.put("name", "Sabina Lorka");
         address.put("street", "Zbiorowa");
         address.put("code", "40-123");
         address.put("city", "Katowice");
         address.put("number", "654");
-        customer.put("name", "Sabina Lorka");
+        customer.put("address", address);
         customer.put("trip", null);
 
-        customer.put("address", address);
         mockMvc.perform(post("/addCustomer")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(customer.toString()))

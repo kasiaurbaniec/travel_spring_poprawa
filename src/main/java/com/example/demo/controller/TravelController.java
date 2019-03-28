@@ -7,6 +7,7 @@ import com.example.demo.model.Trip;
 import com.example.demo.service.TOServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.jdbc.datasource.AbstractDriverBasedDataSource;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -34,14 +35,14 @@ public class TravelController {
         return toServiceImpl.showTrips();
     }
 
-    @GetMapping("/addTrip")
-    Trip addTripFromGET(@RequestParam String id, @RequestParam String startDate, @RequestParam String endDate, @RequestParam String desti,
-                        @RequestParam int price) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        Trip trip = new Trip(LocalDate.parse(startDate, formatter), LocalDate.parse(endDate, formatter), desti);
-        trip.setPrice(price);
-        return toServiceImpl.addTrip(id, trip);
-    }
+//    @GetMapping("/addTrip")
+//    Trip addTripFromGET(@RequestParam String id, @RequestParam String startDate, @RequestParam String endDate, @RequestParam String desti,
+//                        @RequestParam int price) {
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        Trip trip = new Trip(LocalDate.parse(startDate, formatter), LocalDate.parse(endDate, formatter), desti);
+//        trip.setPrice(price);
+//        return toServiceImpl.addTrip(id, trip);
+//    }
 
     @PostMapping("/addTrip")
     Trip addTripFromPOST(@RequestBody Trip trip) {
@@ -52,36 +53,39 @@ public class TravelController {
         return toServiceImpl.addTrip(trip.getDestination().toLowerCase().substring(0, 3), trip);
     }
 
+
+
     @GetMapping("/addCustomer")
-    Customer addCustomerFromGET(@RequestParam String name, @RequestParam String city, @RequestParam String code, @RequestParam String street,
-                                @RequestParam String streetNumber) {
-        Address address = new Address(street, streetNumber, city, code);
+    Customer addCustomerFromGet(@RequestParam String name, @RequestParam String city, @RequestParam String code, @RequestParam String street,
+                                 @RequestParam String streetNumber) {
         Customer customer = new Customer(name);
+        Address address = new Address(street, streetNumber, city, code);
         customer.setAddress(address);
         customer.assignTrip(null);
-        return toServiceImpl.addCustomer(customer);
+        toServiceImpl.addCustomer(customer);
+        return customer;
     }
 
-    @PostMapping("/addCustomer")
+    @PostMapping ("/addCustomer")
     Customer addCustomerFromPOST(Customer customer) {
         customer.setName(customer.getName());
         customer.setAddress(customer.getAddress());
-        customer.assignTrip(customer.getTrip());
-        return toServiceImpl.addCustomer(customer);
+        customer.assignTrip(null);
+        toServiceImpl.addCustomer(customer);
+        return customer;
     }
-
-    @GetMapping("/findCustomerByName")
+    @PostMapping ("/findCustomerByName")
     Customer findCustomer(@RequestParam String name) {
         return toServiceImpl.findCustomerByName(name);
     }
 
-    @GetMapping("/removeCustomer")
+    @PostMapping("/removeCustomer")
     boolean removeCustomer(@RequestParam String name) {
         Customer customer = toServiceImpl.findCustomerByName(name);
         return toServiceImpl.removeCustomer(customer);
     }
 
-    @GetMapping("/removeTrip")
+    @PostMapping("/removeTrip")
     boolean removeTrip(@RequestParam String id) {
         return toServiceImpl.removeTrip(id);
     }
@@ -90,7 +94,7 @@ public class TravelController {
     boolean assignTrip(@RequestParam String id, @RequestParam String name) {
         return toServiceImpl.assignTrip(name, id);
     }
-//localhost:8080/addCustomer?name='Kasia'&city='Katowice'&code='30-454'&street='Gorzka'&streetNumber='32'
+
 
     //http://localhost:8080/swagger-ui.html
 
